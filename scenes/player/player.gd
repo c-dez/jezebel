@@ -34,6 +34,8 @@ var joy_move_jump: String = "joy_l_trigger"
 
 
 
+
+
 # TODO: terminar control con gamepad, movimiento que sea en float
 # TODO: attack() animacion y hitbox, crear enemigo que dispare y los proyectiles "batearlos"
 
@@ -75,7 +77,7 @@ func attack() -> void:
 		### Enciende monitoreo y devuelvee un array con los bodies dentro de el HitBox
 		bat_hit_box.monitoring = true
 		### Aqui tomo en bodie deseado y le doy las propiedades requeridas("desviar el proyectil")
-		
+
 		# print(bat_hit_box.get_overlapping_bodies())
 		
 

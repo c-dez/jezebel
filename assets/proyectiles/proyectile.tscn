@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnnkju1gso85p"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vcpa4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_08dfs"]
+height = 1.0
+
+[node name="Proyectile" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_vcpa4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_08dfs")
