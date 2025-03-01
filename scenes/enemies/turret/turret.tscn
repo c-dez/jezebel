@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://dh5vtnbwuttx8"]
+
+[ext_resource type="Script" path="res://scenes/enemies/turret/turret.gd" id="1_xnpo1"]
+[ext_resource type="Script" path="res://scenes/enemies/turret/detect_player.gd" id="2_nv0k7"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fb0of"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bfcwu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_negiw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ao17v"]
+
+[node name="Turret" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_xnpo1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_fb0of")
+
+[node name="mesh" type="Node3D" parent="."]
+
+[node name="mesh_body" type="MeshInstance3D" parent="mesh"]
+mesh = SubResource("CylinderMesh_bfcwu")
+skeleton = NodePath("../../CollisionShape3D")
+
+[node name="mesh_head" type="MeshInstance3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+mesh = SubResource("BoxMesh_negiw")
+skeleton = NodePath("../../CollisionShape3D")
+
+[node name="DetectPlayer" type="Node3D" parent="."]
+script = ExtResource("2_nv0k7")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="DetectPlayer"]
+transform = Transform3D(3.54, 0, 0, 0, 1.93, 0, 0, 0, 3.94, 0, 0, -4.5)
+shape = SubResource("BoxShape3D_ao17v")
+target_position = Vector3(0, 0, -1.31)
+collision_mask = 2

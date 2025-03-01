@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://b0jj466kty7u1"]
+
+[ext_resource type="PackedScene" uid="uid://c0rqtitncmesv" path="res://scenes/player/player.tscn" id="1_q01dj"]
+[ext_resource type="PackedScene" uid="uid://y6ym1fldyt5b" path="res://addons/graybox/5x_5_box.tscn" id="2_6jtxj"]
+[ext_resource type="PackedScene" uid="uid://dh5vtnbwuttx8" path="res://scenes/enemies/turret/turret.tscn" id="2_jvklh"]
+[ext_resource type="Texture2D" uid="uid://125b78d31v3h" path="res://addons/graybox/textures/GreyboxTextures/greybox_orange_grid.png" id="2_l8lvd"]
+[ext_resource type="Texture2D" uid="uid://dops8uv3tr8ri" path="res://addons/graybox/textures/GreyboxTextures/greybox_lime_grid.png" id="5_md684"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_umdqw"]
+albedo_texture = ExtResource("2_l8lvd")
+
+[sub_resource type="Environment" id="Environment_b8r1n"]
+background_mode = 1
+background_color = Color(0.6571, 0.826345, 0.828308, 1)
+ambient_light_color = Color(0.942191, 0.830621, 0.958661, 1)
+ambient_light_energy = 0.0
+fog_enabled = true
+fog_light_color = Color(0.68605, 0.519548, 0.190957, 1)
+fog_height_density = 2.3579
+volumetric_fog_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_soabp"]
+albedo_texture = ExtResource("5_md684")
+
+[node name="Main" type="Node3D"]
+
+[node name="Turret" parent="." instance=ExtResource("2_jvklh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60163, 1.3591, 25.1511)
+
+[node name="Player" parent="." instance=ExtResource("1_q01dj")]
+transform = Transform3D(-0.999539, 0, 0.030364, 0, 1, 0, -0.030364, 0, -0.999539, 0, 1, 6.25203)
+jump_height = 10.0
+jump_time_to_peak = 0.6
+jump_time_to_decend = 0.5
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_overlay = SubResource("StandardMaterial3D_umdqw")
+use_collision = true
+
+[node name="Floor" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+size = Vector3(100, 2, 100)
+metadata/_edit_lock_ = true
+
+[node name="5x5_box" parent="CSGCombiner3D" instance=ExtResource("2_6jtxj")]
+transform = Transform3D(1, 0, 0, 0, 0.999413, 0.0342716, 0, -0.0342716, 0.999413, 2.7245, 2.5, -4.9995)
+
+[node name="5x5_box3" parent="CSGCombiner3D" instance=ExtResource("2_6jtxj")]
+transform = Transform3D(1, 0, 0, 0, 0.999413, 0.0342716, 0, -0.0342716, 0.999413, 7.7245, 2.5, -9.9995)
+
+[node name="5x5_box4" parent="CSGCombiner3D" instance=ExtResource("2_6jtxj")]
+transform = Transform3D(1, 0, 0, 0, 0.999413, 0.0342716, 0, -0.0342716, 0.999413, 2.7245, 2.5, -14.9995)
+
+[node name="5x5_box5" parent="CSGCombiner3D" instance=ExtResource("2_6jtxj")]
+transform = Transform3D(1, 0, 0, 0, 0.999413, 0.0342716, 0, -0.0342716, 0.999413, 7.7245, 2.5, -19.9995)
+
+[node name="5x5_box2" parent="CSGCombiner3D" instance=ExtResource("2_6jtxj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7913, 2.58748, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b8r1n")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.804438, -2.59662e-08, 0.594037, -0.594037, -3.51631e-08, 0.804438, 0, -1, -4.37114e-08, 4.33733, 14, 0)
+shadow_enabled = true
+
+[node name="plataformas" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_soabp")
+use_collision = true
+
+[node name="5x1" type="CSGBox3D" parent="plataformas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 8, 4)
+size = Vector3(5, 1, 5)
+
+[node name="5x2" type="CSGBox3D" parent="plataformas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.7436, 1, 15.1925)
+size = Vector3(5, 2, 5)
+
+[node name="5x3" type="CSGBox3D" parent="plataformas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.25641, 1, 15.1925)
+size = Vector3(5, 2, 5)
+
+[node name="5x4" type="CSGBox3D" parent="plataformas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 2, 10)
+size = Vector3(4, 4, 4)
+
+[node name="5x5" type="CSGBox3D" parent="plataformas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 2, 10)
+size = Vector3(5, 4, 5)
